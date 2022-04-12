@@ -1,0 +1,18 @@
+01:37:45 **** Build of configuration Debug for project OSlab2a ****
+make all 
+Building file: ../lamport.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"lamport.d" -MT"lamport.d" -o "lamport.o" "../lamport.c"
+../lamport.c: In function ‘thread’:
+../lamport.c:23:4: warning: implicit declaration of function ‘sleep’ [-Wimplicit-function-declaration]
+../lamport.c:27:1: warning: control reaches end of non-void function [-Wreturn-type]
+Finished building: ../lamport.c
+ 
+Building target: OSlab2a
+Invoking: GCC C Linker
+gcc  -o "OSlab2a"  ./lamport.o   -lpthread
+Finished building target: OSlab2a
+ 
+
+01:37:45 Build Finished (took 152ms)
+

@@ -1,0 +1,18 @@
+10:52:02 **** Incremental Build of configuration Debug for project OSlab3-a ****
+make all 
+Building file: ../proizvodjac_potrosac.c
+Invoking: Cross GCC Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"proizvodjac_potrosac.d" -MT"proizvodjac_potrosac.d" -o "proizvodjac_potrosac.o" "../proizvodjac_potrosac.c"
+../proizvodjac_potrosac.c: In function ‘main’:
+../proizvodjac_potrosac.c:68:2: warning: implicit declaration of function ‘sigset’ [-Wimplicit-function-declaration]
+../proizvodjac_potrosac.c:101:3: warning: implicit declaration of function ‘wait’ [-Wimplicit-function-declaration]
+Finished building: ../proizvodjac_potrosac.c
+ 
+Building target: OSlab3-a
+Invoking: Cross GCC Linker
+gcc  -o "OSlab3-a"  ./proizvodjac_potrosac.o   -lpthread
+Finished building target: OSlab3-a
+ 
+
+10:52:02 Build Finished (took 152ms)
+

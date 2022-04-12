@@ -1,0 +1,1 @@
+dekker.d: ../dekker.c

@@ -1,0 +1,1 @@
+lamport.d: ../lamport.c

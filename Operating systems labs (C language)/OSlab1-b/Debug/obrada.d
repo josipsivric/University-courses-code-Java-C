@@ -1,0 +1,1 @@
+obrada.d: ../obrada.c

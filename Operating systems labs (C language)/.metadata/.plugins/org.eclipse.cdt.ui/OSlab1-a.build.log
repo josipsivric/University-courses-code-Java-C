@@ -1,0 +1,6 @@
+10:35:26 **** Incremental Build of configuration Debug for project OSlab1-a ****
+make all 
+make: Nothing to be done for `all'.
+
+10:35:26 Build Finished (took 52ms)
+

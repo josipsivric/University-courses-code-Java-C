@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <malloc.h>
+
+int *TRAZIM;
+int *BROJ;
+int N;
+
+void kriticni_odsjecak (int i);
+void kriticni_odsjecak_izlaz (int i);
+
+void *thread (void *i)
+{
+	int j, k, m;
+	j = *((int *)i);
+	for (k = 1; k <= 5; k++) {
+		kriticni_odsjecak(j);
+		for (m = 1; m <= 5; m++){
+			printf("Dretva: %d, K.O. br: %d, (%d/5)\n",j + 1, k, m);
+			sleep(1);
+		}
+		kriticni_odsjecak_izlaz(j);
+	}
+}
+
+void kriticni_odsjecak (int i)
+{
+	int max, j, x;
+	max = 0;
+	TRAZIM[i] = 1;
+	for (x = 0; x < N; x++) {
+		if (BROJ[x] > max) {
+			max = BROJ[x];
+		}
+	}
+	BROJ[i] = max + 1;
+	TRAZIM[i] = 0;
+	for (j = 0; j < N; j++){
+		while (TRAZIM[j] != 0);
+		while (BROJ[j] != 0 && (BROJ[j] < BROJ[i] || (BROJ[j] == BROJ[i] && j < i)));
+	}
+}
+
+void kriticni_odsjecak_izlaz (int i)
+{
+	BROJ[i] = 0;
+}
+
+int main(int argc, char *argv[])
+{
+	int i;
+	int *br;
+	pthread_t *t;
+	N = atoi(argv[1]);
+	TRAZIM = (int *) malloc (N * sizeof(int));
+	BROJ=(int *) malloc (N * sizeof(int));
+	br=(int *) malloc (N * sizeof(int));
+	t=(pthread_t *) malloc (N * sizeof(pthread_t));
+	for (i = 0; i < N; i++) {
+		TRAZIM[i] = 0;
+		BROJ[i] = 0;
+	}
+	for (i = 0; i < N; i++){
+		br[i] = i;
+		sleep(1);
+		if (pthread_create(&t[i], NULL, thread, ((void *)&br[i]))){
+			printf("Ne mogu stvoriti novu dretvu!\n");
+			exit(1);
+		}
+	}
+	for (i = 0; i < N; i++){
+		pthread_join(t[i], NULL);
+	}
+	free(TRAZIM);
+	free(BROJ);
+	free(br);
+	free(t);
+
+	return 0;
+}
